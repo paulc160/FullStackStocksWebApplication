@@ -1,5 +1,4 @@
 fastapi==0.63.0
-sqlite==3.32.3
 datetime==4.3
 yfinance==0.1.55
 pandas==1.2.1
