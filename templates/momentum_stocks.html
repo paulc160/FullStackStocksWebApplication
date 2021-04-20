@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 style="padding-top: 50px;">Momentum Stocks</h1>
+<div class="tip-bubble" style="margin-top: 15px;">
+    <i class="info circle icon" style="margin-right: 20px;"></i>
+    <p>This strategy calculates the 1 year, 6 month, 3 month and 1 month price returns of the stocks in the S&P 500. The HQM Score on the far right is a measure
+        of the stocks with the most momentum i.e with the highest relative returns on all of the timeframes. The higher the HQM score the more momentum the stock
+        has and therefore a stock we should be interested in examining further </p>
+</div>
+<h4 class="ui horizontal divider header"></h4>
+<i class="line chart icon"></i>
+Highest Momentum Stocks
+</h4>
+{{stocks | safe}}
+<style>
+    .tip-bubble{
+     display: flex;
+     align-items: center;
+     
+     padding: 15px 15px;
+     line-height: 22px;
+     background-color: rgb(81,164,251);
+     color: rgb(249,250,251);
+     border-radius: 10px;
+     font-size: 20px;
+     width: 100%;
+    }
+  
+</style>
+{% endblock %}

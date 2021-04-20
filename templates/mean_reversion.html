@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 style="padding-top: 50px;">Mean Reversion Strategy</h1>
+<div class="tip-bubble" style="margin-top: 15px;">
+    <i class="info circle icon" style="margin-right: 20px;"></i>
+    <p>This is a strategy that first all constituents of the S&P 500 are tested for stationarity. The Means of the stocks that are stationary are then calculated.
+        The main strategy here is to buy stocks whose current price is less than the mean, with the hope that stock prices tend to revert towards the mean</p>
+</div>
+<h4 class="ui horizontal divider header"></h4>
+<i class="line chart icon"></i>
+Mean Reverting Stocks
+</h4>
+{{stocks | safe}}
+<style>
+    .tip-bubble{
+     display: flex;
+     align-items: center;
+     
+     padding: 15px 15px;
+     line-height: 22px;
+     background-color: rgb(81,164,251);
+     color: rgb(249,250,251);
+     border-radius: 10px;
+     font-size: 20px;
+     width: 100%;
+    }
+  
+</style>
+{% endblock %}

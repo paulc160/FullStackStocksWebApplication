@@ -1,0 +1,172 @@
+<html>
+    <head>
+        <title>Quant Synergy</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    </head>
+    <body>
+      <div class="ui right grid">
+        <div class="right aligned column">
+            <div class="ui compact menu" style="margin-top: 20px; margin-right: 20px;">
+              <div class="ui large action input">
+            	<input type="text" placeholder="Search Stock Ticker" id="symbol"/>
+              <div class="ui button" id="myButton" onclick="location.href='/stock/'+ document.getElementById('symbol').value.toUpperCase();">Go</div>
+              </div> 
+            </div>        
+        </div>
+    </div>
+        <div class="ui large blue left fixed vertical inverted menu">
+          <a><img src="https://lh3.googleusercontent.com/FhaxdMnRF3btnClMT9ASupIStZvrp2UFVGWHcTEJDqxlUJNMNovU9SZ-rqX8lXggTCED7HWLYbQIcYDlz7muSjjeQpsxtkZTvhTH4I9f1k7GUfXTm2v9qldPNiJB1gT8_F-V6VAW=w520-h287-p-k" class="image" style="width: 100%;"/> </a>
+
+          <div class="item">
+            <div class="header">Stock Dashboard</div>
+            <div class="menu">
+              <a href="/" class="item">
+                      Stocks
+                      <i class="line chart icon"></i>
+                    </a>
+            </div>
+          </div>
+        <div class="item">
+            <div class="header">Sentiment</div>
+            <div class="menu">
+          <a href="/wsb_tracker" class="item">
+                      <i class="reddit icon"></i>
+                      Wall Street Bets Tracker
+                </a>
+          <a href="/sentiment" class="item">
+                      <i class="globe icon"></i>
+                      News Articles
+                </a>
+            <a href="/twitter_sentiment" class="item">
+                  <i class="twitter icon"></i>
+                  Twitter Posts
+            </a>
+            </div>
+          </div>
+        <div class="item">
+            <div class="header">Quant Tools</div>
+            <div class="menu">
+          <a href="/correlation" class="item">
+                      <i class="calculator icon"></i>
+                      Correlation Calculator
+                </a>
+          <a href="/stationary" class="item">
+                      <i class="industry icon"></i>
+                      Stationarity Tool
+                 </a>
+            </div>
+          </div>
+        <div class="item">
+            <div class="header">Strategies</div>
+            <div class="menu">
+          <a href="/mean_reversion" class="item">
+                      <i class="balance scale icon"></i>
+                      Mean Reversion
+                    </a>
+          <a href="/momentum_stocks" class="item">
+                      <i class="chart line icon"></i>
+                      Momentum Stocks
+                    </a>
+            </div>
+          </div>
+        <div class="item">
+            <div class="header">Forecasting</div>
+            <div class="menu">
+            <a href="/arima" class="item">
+                      <i class="server icon"></i>
+                      ARIMA Model
+                    </a>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="footer">
+          <a href="https://twitter.com/paulconnolly17" class="item">
+            <i class="twitter icon"></i>
+            Twitter</a>
+          <a href="https://github.com/paulc160" class="item">
+            <i class="github icon"></i>
+            Github</a>
+          <a href="/disclaimer">Disclaimer</a>
+          <a href="/contact">Contact Me</a>
+          <a href="/resources">Resources</a>
+          <a href="/home">Home</a>
+        </div>
+        <div class="ui container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+<style>
+.navbar {
+  overflow: hidden;
+  background-color: #DCDCDC;
+  position: fixed; 
+  top: 0; 
+  width: 100%; 
+}
+
+
+.navbar a {
+  float: right;
+  display: block;
+  color: #000000;
+  text-align: left;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+
+.navbar a:hover {
+  background: #D3D3D3;
+  color: black;
+}
+
+
+
+.footer {
+  overflow: hidden;
+  background-color: #DCDCDC;
+  position: fixed; 
+  bottom: 0; 
+  width: 100%; 
+}
+
+
+.footer a {
+  float: right;
+  display: block;
+  color: #000000;
+  text-align: left;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+
+.footer a:hover {
+  background: #D3D3D3;
+  color: black;
+}
+
+.navbar input[type=text] {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 800px;
+  font-size: 17px;
+}
+</style>
+<script>
+  function toUpperCase() {
+    var a = document.getElementById('symbol').value;
+    var res = a.toUpperCase();
+
+    
+  }
+</script>
+</html>

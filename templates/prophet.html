@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 style="padding-top: 50px;">Prophet Forecasting</h1>
+<h2>TSLA</h2>
+<img src="https://am3pap001files.storage.live.com/y4m1UizuAMCKaEHQgOdTAqGaEKMZAMcyD4La5e4YDkF2EP0yvXh3IdLC3ZAv2vskiM7y0aEVMSaaVs-0IgBEA0znZdSCLn79oF_aDKsuG5U0KcbC1GtTqOOxR0iLDBFq9DBraj5Dc_jLxS-1Aq4ZRH25VGmpN6zpqRMQSmGbc5DeGbCO4R1ca8ASBg-T9FXsV3b?width=720&height=432&cropmode=none" width="720" height="432" />
+<img src="https://am3pap001files.storage.live.com/y4mjoYpnXs1wRYFgw5VMsiWQ9cqJrtaCGvrswQnnoAW0Y3c8aj8xZt4jQBmtZDY-Rk5HiacAWg9iqqAu3x81_wBel6nhSOOhDfUMAAuezc3b4niIc0vXhhvw0CvVgkyN8_UMvH6ulH7IZgoPRCAd-Oi98dRZ4QR01hbxs__QswYfexAap-SvF_8UVaJCN9dfYgH?width=648&height=864&cropmode=none" width="648" height="864" />
+<form method="post">
+    <div class="ui input">
+        <input type="text" placeholder="Sepal Length" name="sepal_length">
+    </div>
+    <div class="ui input">
+        <input type="text" placeholder="Sepal Width" name="sepal_width">
+    </div>
+    <div class="ui input">
+        <input type="text" placeholder="Petal Length" name="petal_length">
+    </div>
+    <div class="ui input">
+        <input type="text" placeholder="Petal Width" name="petal_width">
+    </div>
+<button class="ui button" type="submit">Search</button>
+</form>
+{% endblock %}

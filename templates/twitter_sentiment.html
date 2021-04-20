@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 style="padding-top: 50px;">Twitter Sentiment</h1>
+<div class="tip-bubble" style="margin-top: 15px;">
+  <i class="info circle icon" style="margin-right: 20px;"></i>
+  <p>Enter Ticker in the form AAPL, and returened will be the number of positive and negative tweets within the past 24 hours</p>
+</div>
+<div>
+<form method="post" style="padding-top: 20px;">
+    <div class="ui input">
+        <input type="text" placeholder="Search" name="twitterticker">
+    </div>
+<button class="ui button" type="submit">Search</button>
+</form>
+</div>
+<div>
+<h2 style="padding-top: 25px; text-align: center">{{ twittersentimenttickers }}</h2>
+</div>
+
+<div class="ui segment">
+    <div class="ui two column very relaxed grid">
+      <div class="column">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <div>
+      <h4 class="ui horizontal divider header" style="text-align: center">
+          <i class="line chart icon"></i>
+          Overall Sentiment
+      </h4>
+      <canvas id="doughnut-chart" width="400" height="400"></canvas>
+       </div>
+      </div>
+      <div class="column">
+  <div>
+    <h4 class="ui horizontal divider header" style="margin-top: 25px; text-align: center">
+      <i class="comment alternate outline icon"></i>
+        Ticker Information
+    </h4>
+      <section class="container">
+      <article>
+      <table class="ui definition table">
+        <tbody>
+          <tr>
+            <td class="two wide column">Current Price</td>
+            <td>{{ last_quote }}</td>
+          </tr>
+          <tr>
+            <td>Volume</td>
+            <td>{{ Volume }}</td>
+          </tr>
+          <tr>
+            <td>Open</td>
+            <td>{{ Open }}</td>
+          </tr>
+          <tr>
+            <td>Close</td>
+            <td>{{ Close }}</td>
+          </tr>
+          <tr>
+            <td>High</td>
+            <td>{{ High }}</td>
+          </tr>
+          <tr>
+            <td>Low</td>
+            <td>{{ Low }}</td>
+          </tr>
+          <tr>
+            <td>52 Week Low</td>
+            <td>{{ low52 }}</td>
+          </tr>
+          <tr>
+            <td>52 Week High</td>
+            <td>{{ high52 }}</td>
+          </tr>
+        </tbody>
+      </table>
+      </article>
+  </div>
+      </div>
+    </div>
+    <div class="ui vertical divider">
+      and
+    </div>
+  </div>
+<div>
+    <h4 class="ui horizontal divider header">
+      <i class="twitter icon"></i>
+      Recent Posts
+    </h4>
+    {{posts | safe}}
+    </div>
+  <style>
+    .tip-bubble{
+     display: flex;
+     align-items: center;
+     
+     padding: 15px 15px;
+     line-height: 22px;
+     background-color: rgb(81,164,251);
+     color: rgb(249,250,251);
+     border-radius: 10px;
+     font-size: 20px;
+     width: 100%;
+    }
+  
+  </style>
+<script>
+ new Chart(document.getElementById("doughnut-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["Positive", "Negative"],
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#3FBF3F", "#F43333","#3393F4"],
+          data: ["{{ positive }}","{{ negative }}"]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: false,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+});
+ 
+
+</script>
+{% endblock %}

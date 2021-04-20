@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1 style="padding-top: 50px;">Stationarity Tool</h1>
+<div class="tip-bubble" style="margin-top: 15px;">
+  <i class="info circle icon" style="margin-right: 20px;"></i>
+  <p>Stationary data is simply data whose statistical measures such as mean, variance and standard deviation are constant. 
+    If stock data is stationary we can attempt to predict future values in a variety of ways e.g. linear regression, using 
+    the mean or more complex machine learning models. This tool performs an adf test on the entered stock and returns 
+    the adf values</p>
+</div>
+<table class="ui celled table">
+  <thead>
+    <tr>
+      <th>P-Value</th>
+      <th>ADF Statistic</th>
+      <th>Stationary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="positive">
+      <td>Less Than 0.05</td>
+      <td>Less Than All Critical Values</td>
+      <td>Stationary</td>
+    </tr>
+    <tr class="positive">
+      <td>Less Than 0.05</td>
+      <td>Not less than all Critical Values</td>
+      <td>Stationary</td>
+    </tr>
+    <tr class="positive">
+      <td>Greater than 0.05</td>
+      <td>Less than all Critical Values</td>
+      <td>Stationary</td>
+    </tr>
+    <tr class="negative">
+      <td>Greater than 0.05</td>
+      <td>Not less than all Critical Values</td>
+      <td>Non Stationary</td>
+    </tr>
+  </tbody>
+</table>
+<form method="post" style="padding-top: 20px;">
+    <div class="ui input">
+        <input type="text" placeholder="Search" name="sticker">
+    </div>
+<button class="ui button" type="submit">Search</button>
+</form>
+{% if stationaryticker %}
+<h2>{{ stationaryticker }}</h2>
+{% endif %}
+<table class="ui basic table">
+    <thead>
+      <tr>
+        <th>ADF Statistic</th>
+        <th>P-Value</th>
+        <th>Critical Value: 1%</th>
+        <th>Critical Value: 5%</th>
+        <th>Critical Value: 10%</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ adfstatistic }}</td>
+        <td>{{ pvalue }}</td>
+        <td>{{ criticalvalue1 }}</td>
+        <td>{{ criticalvalue5 }}</td>
+        <td>{{ criticalvalue10 }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <style>
+    .tip-bubble{
+     display: flex;
+     align-items: center;
+     
+     padding: 15px 15px;
+     line-height: 22px;
+     background-color: rgb(81,164,251);
+     color: rgb(249,250,251);
+     border-radius: 10px;
+     font-size: 20px;
+     width: 100%;
+    }
+  
+  </style>
+{% endblock %}

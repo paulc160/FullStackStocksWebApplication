@@ -1,0 +1,131 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 style="padding-top: 50px;">WallStreetBets Subreddit</h1>
+<div class="tip-bubble" style="margin-top: 15px;">
+  <i class="info circle icon" style="margin-right: 20px;"></i>
+  <p>Below is the most talked about stocks from the subreddit WallStreetBets over the past 24 hours</p>
+</div>
+<div class="ui segment">
+  <div class="ui two column very relaxed grid">
+    <div class="column">
+      <div>
+    <h4 class="ui horizontal divider header" style="padding-top: 25px; text-align: center">
+        <i class="line chart icon"></i>
+        Tickers by Mention
+    </h4>
+    <canvas id="myChart" width="700" height="700"></canvas>
+     </div>
+    </div>
+    <div class="column">
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<div>
+  <h4 class="ui horizontal divider header" style="padding-top: 25px; text-align: center">
+    <i class="comment alternate outline icon"></i>
+      Overall Sentiment
+  </h4>
+  <canvas id="doughnut-chart" width="400" height="400"></canvas>
+</div>
+    </div>
+  </div>
+  <div class="ui vertical divider">
+    and
+  </div>
+</div>
+<div></div>
+<h4 class="ui horizontal divider header">
+  <i class="reddit icon"></i>
+  Recent Posts
+</h4>
+{{posts | safe}}
+</div>
+<style>
+  .tip-bubble{
+   display: flex;
+   align-items: center;
+   
+   padding: 15px 15px;
+   line-height: 22px;
+   background-color: rgb(81,164,251);
+   color: rgb(249,250,251);
+   border-radius: 10px;
+   font-size: 20px;
+   width: 100%;
+  }
+</style>
+<script>
+   Chart.defaults.global.legend.display = false;
+  var ctx = document.getElementById("myChart");
+  var myChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+      labels : [
+      {% for wsb in wsbs %}
+         "{{ wsb.symbol }}",
+      {% endfor %}
+],
+  datasets: [
+  { label: 'Sentiment Scores By Day',
+  data: [
+  {% for wsb in wsbs %}
+      {% if wsb.num_mentions > 8 %}
+         "{{ wsb.num_mentions }}",
+      {% endif %}
+  {% endfor %}
+  ],
+  backgroundColor :['rgba(255, 129, 102, 1)',
+  'rgba(234, 162, 235, 1)',
+  'rgba(255, 206, 36, 1)',
+  'rgba(75, 192, 192, 1)',
+  'rgba(153, 102, 255, 1)',
+  'rgba(0,255,0,0.3)',
+  'rgba(240, 92, 92, 1)',
+  'rgba(92, 232, 240, 1)',
+  'rgba(208, 92, 240, 1)',
+  'rgba(255, 129, 102, 1)',
+  'rgba(234, 162, 235, 1)',
+  'rgba(255, 206, 36, 1)',
+  'rgba(75, 192, 192, 1)',
+  'rgba(153, 102, 255, 1)',
+  'rgba(0,255,0,0.3)',
+  'rgba(240, 92, 92, 1)',
+  'rgba(92, 232, 240, 1)',
+  'rgba(208, 92, 240, 1)',
+  'rgba(255, 129, 102, 1)',
+  ]
+  }
+  ]
+  },
+  options: {
+    responsive: true,
+      title: {
+        display: false
+      },
+      legend: {
+    labels: {
+        fontSize: 0
+    }
+}
+    }
+});
+
+new Chart(document.getElementById("doughnut-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["Positive", "Negative", "Neutral"],
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["#3FBF3F", "#F43333","#3393F4"],
+          data: [0.45,0.3,0.25]
+        }
+      ]
+    },
+    options: {
+      title: {
+        display: false,
+        text: 'Predicted world population (millions) in 2050'
+      }
+    }
+});
+</script>
+{% endblock %}

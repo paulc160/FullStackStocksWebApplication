@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 style="padding-top: 50px;">Sentiment Analysis</h1>
+<div class="tip-bubble" style="margin-top: 15px;">
+    <i class="info circle icon" style="margin-right: 20px;"></i>
+    <p>Simply enter stock ticker of choice and returned is positive/negative sentiment scores by day as well as a chart illustrating this.Scores over 0.2 are considered strong positive sentiment while between 0 and 0.1 is weak positive sentiment.
+        Under -0.2 is strong negative sentiment and between 0 and -0.1 is weak negative sentiment. A list of all articles used for this sentiment analysis is also avaliable below, as well as links to these if needed.</p>
+  </div>
+<form method="post" style="padding-top: 20px;">
+    <div class="ui input">
+        <input type="text" placeholder="Search" name="sentimentticker">
+    </div>
+<button class="ui button" type="submit">Search</button>
+</form>
+<h2 style="padding-top: 25px; text-align: center">{{ sentimenttickers }}</h2>
+<div>
+    <h4 class="ui horizontal divider header" style="padding-top: 25px; text-align: center">
+        <i class="line chart icon"></i>
+        Sentiment Scores
+    </h4>
+    {{date_scores | safe}}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<div>
+    <h4 class="ui horizontal divider header" style="padding-top: 25px; text-align: center">
+        <i class="line chart icon"></i>
+        Sentiment Score Chart
+    </h4>
+    <canvas id="myChart" width="500" height="300"></canvas>
+</div>
+<div>
+<h4 class="ui horizontal divider header" style="padding-top: 25px; text-align: center">
+    <i class="line chart icon"></i>
+    All News Articles
+</h4>
+{{news | safe}}
+</div>
+<script>
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels : [
+        {% for date in dates %}
+           "{{ date }}",
+        {% endfor %}
+	],
+    datasets: [
+    { label: 'Sentiment Scores By Day',
+    data: [
+          {% for score in scores %}
+           {{ score }},
+          {% endfor %}
+    ],
+    backgroundColor :['rgba(255, 129, 102, 1)',
+    'rgba(234, 162, 235, 1)',
+    'rgba(255, 206, 36, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(0,255,0,0.3)',
+    'rgba(240, 92, 92, 1)',
+    'rgba(92, 232, 240, 1)',
+    'rgba(208, 92, 240, 1)',
+    'rgba(255, 129, 102, 1)',
+    'rgba(234, 162, 235, 1)',
+    'rgba(255, 206, 36, 1)',
+    'rgba(75, 192, 192, 1)',
+    'rgba(153, 102, 255, 1)',
+    'rgba(0,255,0,0.3)',
+    'rgba(240, 92, 92, 1)',
+    'rgba(92, 232, 240, 1)',
+    'rgba(208, 92, 240, 1)',
+    'rgba(255, 129, 102, 1)',
+    ],
+    }
+    ]
+    },
+    options: {
+        scales: {
+            X: {
+                type: 'time',
+                time: {
+                    unit: 'day'
+                }
+            }
+        }
+    }
+});
+    </script>
+<style>
+    .tip-bubble{
+     display: flex;
+     align-items: center;
+     
+     padding: 15px 15px;
+     line-height: 22px;
+     background-color: rgb(81,164,251);
+     color: rgb(249,250,251);
+     border-radius: 10px;
+     font-size: 20px;
+     width: 100%;
+    }
+</style>
+{% endblock %}
