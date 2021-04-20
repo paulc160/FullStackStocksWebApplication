@@ -15,8 +15,6 @@ import statistics
 import numpy as np
 from finvizfinance.quote import finvizfinance
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-from fbprophet import Prophet
-from psaw import PushshiftAPI
 from textblob import TextBlob
 
 
