@@ -11,7 +11,6 @@ from fastapi.responses import JSONResponse
 from statsmodels.tsa.stattools import adfuller
 import tweepy
 from textblob import TextBlob
-import matplotlib.pyplot as plt
 import statistics
 import numpy as np
 from finvizfinance.quote import finvizfinance
